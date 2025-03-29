@@ -22,6 +22,11 @@ impl Heap {
         self.array[b] = temp;
     }
 
+    //  If the left child exists and is greater than the current largest node, mark it as largest.
+    /// Check if the right child exists.
+    // If the right child exists and is greater than the current largest node, mark it as largest
+    // If the largest node is not the root node, swap the root node with the largest node using the swap function.
+    // Apply heapify operation to the affected subtree.
     pub fn heapify(&mut self, i: usize) {
         let mut largest = i;
         let left = 2 * i + 1;
@@ -41,10 +46,11 @@ impl Heap {
         }
     }
 
-    // Build a max heap from an existing array
+    // Get the number of elements in the heap.
+    // Identify the starting point for heapification. The function identifies the last non-leaf node in the heap, which is the parent of the last element. This is calculated as (n - 1) / 2.
+    // The function then enters a loop that starts from the last non-leaf node and goes up to the root node.
+    // Inside the loop, it calls heapify(heap, i) to ensure that the subtree rooted at i is a max heap heapifying all the levels.
     pub fn build_heap(&mut self) {
-        // Start from the last non-leaf node (parent of the last
-        // leaf) and heapify all levels in reverse order
         let mut i = self.size;
         while i != 0 {
             self.heapify(i);
